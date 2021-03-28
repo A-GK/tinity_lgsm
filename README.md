@@ -1,4 +1,6 @@
 Official installation https://linuxgsm.com/lgsm/rustserver/
+
+Dependencies `sudo apt -y install curl python3 zip unzip`
 Install this fork:
 1. wget -O linuxgsm.sh https://linuxgsm.sh
 2. Modify 
