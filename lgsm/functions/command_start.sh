@@ -205,11 +205,11 @@ if [ "$latest_oxide_version" != "$current_oxide_version" ] || [ -z "$current_oxi
 then
     echo "Writing new version ["$latest_oxide_version"] to file..."
     echo "$latest_oxide_version" > oxide.version
-    echo "New version written successfully. Updating server..."
+    echo "New version written successfully. Updating Rust server..."
     ./rustserver update >/dev/null 2>&1
     echo "Updating Oxide..."
     ./rustserver mods-update >/dev/null 2>&1
-    echo "All operations completed successfully!"
+    echo "All updates completed successfully!"
 else
     echo "No update is available for Rust & Oxide"
 fi
