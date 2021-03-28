@@ -195,6 +195,26 @@ if [ "${updateonstart}" == "yes" ]||[ "${updateonstart}" == "1" ]||[ "${updateon
 	fn_firstcommand_reset
 fi
 
+
+# Part of the code from https://github.com/zenemith/Rust
+echo "Checking for Rust and Oxide updates (Update only if both have an update)"
+latest_oxide_version=$(curl --silent "https://umod.org/games/rust/latest.json" | python3 -c "import sys, json; print(json.load(sys.stdin)['version'])")
+current_oxide_version=$(cat oxide.version)
+echo "Checking for a new oxide version..."
+if [ "$latest_oxide_version" != "$current_oxide_version" ] || [ -z "$current_oxide_version" ]
+then
+    echo "Writing new version ["$latest_oxide_version"] to file..."
+    echo "$latest_oxide_version" > oxide.version
+    echo "New version written successfully. Updating server..."
+    ./rustserver update >/dev/null 2>&1
+    echo "Updating Oxide..."
+    ./rustserver mods-update >/dev/null 2>&1
+    echo "All operations completed successfully!"
+else
+    echo "No update is available for Rust & Oxide"
+fi
+
+
 fn_print_dots "${servername}"
 
 if [ "${shortname}" == "ts3" ]; then
