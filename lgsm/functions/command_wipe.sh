@@ -204,6 +204,25 @@ fn_wipe_server_files(){
 	fi
 
 
+	# Wipe shop tokens data (Only on full wipes)
+	# data/ServerRewards/player_data.json"
+	if [ "${fullwipe}" == "1" ]; then
+		serverrewards = "${oxidedata}ServerRewards/"
+		if [ -n "$(find "${serverrewards}" -type f -name "player_data.json")" ]; then
+			echo -en "removing player_data.json files..."
+			fn_sleep_time
+			fn_script_log_info "Removing Server Rewards player_data files: ${serverrewards}/player_data.json"
+			find "${serverrewards:?}" -type f -name "player_data.json" -delete | tee -a "${lgsmlog}"
+			fn_wipe_exit_code
+			fn_sleep_time
+		else
+			echo -e "no Server Rewards player_data files to remove"
+			fn_sleep_time
+			fn_script_log_pass "no Server Rewards player_data files to remove"
+		fi
+	fi
+
+
 	####################################################
 
 
