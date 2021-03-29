@@ -29,6 +29,8 @@ fn_wipe_server_files(){
 	fn_print_start_nl "Changing the server seed"
 	fn_script_log_info "Changing the server seed"
 
+	fn_fetch_file_github "lgsm/functions" "seed_changer.py" "${functionsdir}" "chmodx" "norun" "noforce" "nohash"
+
 	python3 "${functionsdir}"/seed_changer.py "${servercfgfullpath}" "${serverseedsfullpath}"
 
 	fn_print_start_nl "Changed the server's seed"

@@ -47,6 +47,7 @@ def replace_seed(seed):
     except Exception as e:
         print(f"An error occurred while setting the seed: {e}")
 
+
 new_seed = get_next_seed()
 print(f"Changing seed to {new_seed}")
 replace_seed(new_seed)
