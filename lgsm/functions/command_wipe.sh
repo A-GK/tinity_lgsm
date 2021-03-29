@@ -25,6 +25,15 @@ fn_wipe_exit_code(){
 fn_wipe_server_files(){
 	fn_print_start_nl "Wiping server"
 	fn_script_log_info "Wiping server"
+
+	fn_print_start_nl "Changing the server seed"
+	fn_script_log_info "Changing the server seed"
+
+	python3 "${functionsdir}"/seed_changer.py "${servercfgfullpath}" "${serverseedsfullpath}"
+
+	fn_print_start_nl "Changed the server's seed"
+	fn_script_log_info "Changed the server's seed"
+
 	# Wipe procedural map.
 	if [ -n "$(find "${serveridentitydir}" -type f -name "proceduralmap.*.map")" ]; then
 		echo -en "removing procedural map proceduralmap.*.map file(s)..."
