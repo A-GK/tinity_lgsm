@@ -142,6 +142,31 @@ fn_wipe_server_files(){
 		fn_sleep_time
 		fn_script_log_pass "No player states to remove"
 	fi
+
+
+	####################################################
+	# Oxide custom data removal
+
+
+	# Wipe furnace splitter files
+	# data\FurnaceSplitter.json
+	if [ -n "$(find "${oxidedata}" -type f -name "FurnaceSplitter.json")" ]; then
+		echo -en "Removing FurnaceSplitter data file..."
+		fn_sleep_time
+		fn_script_log_info "Removing urnaceSplitter data file: ${oxidedata}/FurnaceSplitter.json"
+		find "${oxidedata:?}" -type f -name "FurnaceSplitter.json" -delete | tee -a "${lgsmlog}"
+		fn_wipe_exit_code
+		fn_sleep_time
+	else
+		echo -e "no FurnaceSplitter.json to remove"
+		fn_sleep_time
+		fn_script_log_pass "No FurnaceSplitter.json to remove"
+	fi
+
+
+	####################################################
+
+
 	# Wipe blueprints only if full-wipe command was used.
 	if [ "${fullwipe}" == "1" ]; then
 		if [ -n "$(find "${serveridentitydir}" -type f -name "player.blueprints.*.db")" ]; then
