@@ -151,11 +151,11 @@ fn_wipe_server_files(){
 
 
 	# Wipe furnace splitter files
-	# data\FurnaceSplitter.json
+	# data/FurnaceSplitter.json
 	if [ -n "$(find "${oxidedata}" -type f -name "FurnaceSplitter.json")" ]; then
 		echo -en "Removing FurnaceSplitter data file..."
 		fn_sleep_time
-		fn_script_log_info "Removing urnaceSplitter data file: ${oxidedata}/FurnaceSplitter.json"
+		fn_script_log_info "Removing FurnaceSplitter data file: ${oxidedata}/FurnaceSplitter.json"
 		find "${oxidedata:?}" -type f -name "FurnaceSplitter.json" -delete | tee -a "${lgsmlog}"
 		fn_wipe_exit_code
 		fn_sleep_time
@@ -163,6 +163,44 @@ fn_wipe_server_files(){
 		echo -e "no FurnaceSplitter.json to remove"
 		fn_sleep_time
 		fn_script_log_pass "No FurnaceSplitter.json to remove"
+	fi
+
+
+	# Wipe auto lock files
+	# data/AutoLock.json
+	if [ -n "$(find "${oxidedata}" -type f -name "AutoLock.json")" ]; then
+		echo -en "Removing AutoLock data file..."
+		fn_sleep_time
+		fn_script_log_info "Removing AutoLock data file: ${oxidedata}/AutoLock.json"
+		find "${oxidedata:?}" -type f -name "AutoLock.json" -delete | tee -a "${lgsmlog}"
+		fn_wipe_exit_code
+		fn_sleep_time
+	else
+		echo -e "no AutoLock.json to remove"
+		fn_sleep_time
+		fn_script_log_pass "No AutoLock.json to remove"
+	fi
+
+
+	# Wipe NTeleportation files
+	# data/NTeleportationAdmin.json
+	# data/NTeleportationBandit.json
+	# data/NTeleportationHome.json
+	# data/NTeleportationIsland.json
+	# data/NTeleportationOutpost.json
+	# data/NTeleportationTPR.json
+	# data/NTeleportationTPT.json
+	if [ -n "$(find "${oxidedata}" -type f -name "NTeleportation*.json")" ]; then
+		echo -en "removing NTeleportation*.json files..."
+		fn_sleep_time
+		fn_script_log_info "Removing NTeleportation files: ${oxidedata}/NTeleportation*.json"
+		find "${oxidedata:?}" -type f -name "NTeleportation*.json" -delete | tee -a "${lgsmlog}"
+		fn_wipe_exit_code
+		fn_sleep_time
+	else
+		echo -e "no NTeleportation files to remove"
+		fn_sleep_time
+		fn_script_log_pass "no NTeleportation files to remove"
 	fi
 
 
